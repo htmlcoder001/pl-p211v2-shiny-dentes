@@ -119,21 +119,45 @@
                     <img src="form/prod.png" alt="">
                 </div>
             </div>
+    
+            <style>
+                .time_remains {
+                    font-size: 1.1em;
+                    color: red;
+                    font-weight: bold
+                }
+                .order_block {
+                    max-width: 430px;
+                    width: 100%;
+                    margin: auto;
+                    text-align: center;
+                    background: #fff;
+                    -webkit-box-shadow: 0 0 25px 0 rgb(0 0 0 / 12%);
+                    box-shadow: 0 0 25px 0 rgb(0 0 0 / 12%);
+                    border: 3px dashed #eaeaea;
+                    border-radius: 0;
+                }
+                .order_block h3 {
+                    font: bold 18px Arial !important;
+                    background: transparent;
+                    text-align: center;
+                }
+            </style>
 
-
-            <div class="form_wrap" id="objectScrollAttention">
+            <div class="form_wrap order_block" id="objectScrollAttention">
                 <form method="POST" geo="pl" action="api.php" 
 	onsubmit="return validate_form(this, 'Sprawdź, czy wprowadzone dane są poprawne');">
-                        <label class="descount">Rabat -50%</label>
-
-                        <div id="price">
-                            <div class="price_new">
-                                178 zł
-                            </div>
-                            <div class="price_old">
-                                356 zł
-							</div>
-                        </div>
+    
+                    <p class="price">
+                        <del style="font-size:22px;">356 zł</del>
+        
+                        <span class="price_red" style="font-size: 30px;
+                                            color: red;
+                                            margin-left: 15px;
+                                            font-weight: 700;">178 zł</span>
+                    </p>
+                    <h3>Wszystko, co musisz zrobić, to wpisać <br>swoje imię i nazwisko oraz numer telefonu komórkowego.
+                        <br>Pospiesz się! Pozostało czasu:<br><span class="time_remains" id="min">30</span> : <span class="time_remains" id="sec">00</span></h3>
 
                         <label class="inp_name">Twoje imię</label>
                         <input name="name" placeholder="" required="" type="text">
@@ -160,6 +184,20 @@
         </div>
 		<br>
         <!--Form END-->
+                        <script>
+                            var intr,
+                              time = 1800;
+                            function start_timer() {
+                                intr = setInterval(tick, 1e3);
+                            }
+                            function tick() {
+                                time -= 1;
+                                var e = Math.floor(time / 60),
+                                  t = time - 60 * e;
+                                0 == e && 0 == t && clearInterval(intr), (t = t >= 10 ? t : "0" + t), $("#min").html(e), $("#sec").html(t);
+                            }
+                            start_timer();
+                        </script>
 						
                     </div><!--END .article_content-->
                     <div class="artcile_data">
